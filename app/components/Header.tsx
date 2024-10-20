@@ -14,7 +14,7 @@ const Header = () => {
     await supabase.auth.signOut();
     router.push("/login");
     router.refresh();
-    toast.success("User logout", {
+    toast.success("User logOut", {
       style: {},
       duration: 3000,
       position: "top-center",

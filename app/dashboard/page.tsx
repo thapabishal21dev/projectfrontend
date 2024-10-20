@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Headers from "../components/Header";
 import CreatePost from "../components/CreatePost";

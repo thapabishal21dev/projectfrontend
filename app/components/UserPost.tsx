@@ -17,7 +17,6 @@ interface IPost {
 
 const UserPost = () => {
   const user = useSession()?.user;
-
   const [getPosts, setGetPosts] = useState<IPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const supabase = createSupabaseBrowserClient();
