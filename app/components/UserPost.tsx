@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { BiLike, BiRepost } from "react-icons/bi";
 import { createSupabaseBrowserClient } from "../lib/supabase/browser-client";
+import useSession from "../lib/supabase/use-session";
+import { toast, Toaster } from "sonner";
 
 interface IPost {
   id: number;
@@ -14,6 +16,8 @@ interface IPost {
 }
 
 const UserPost = () => {
+  const user = useSession()?.user;
+
   const [getPosts, setGetPosts] = useState<IPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const supabase = createSupabaseBrowserClient();
@@ -37,22 +41,33 @@ const UserPost = () => {
     email: string
   ) => {
     const newLikeCount = value + 1;
-    const { error } = await supabase
-      .from("posts")
-      .update({ like_count: newLikeCount })
-      .eq("id", idNbr)
-      .eq("email", email)
-      .select();
-    if (error) {
-      console.error("Error updating like_count:", error.message);
-      return;
-    }
 
-    setGetPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post.id === idNbr ? { ...post, like_count: post.like_count + 1 } : post
-      )
-    );
+    if (email === user?.email) {
+      const { error } = await supabase
+        .from("posts")
+        .update({ like_count: newLikeCount })
+        .eq("id", idNbr)
+        .eq("email", email)
+        .select();
+      if (error) {
+        console.error("Error updating like_count:", error.message);
+        return;
+      }
+
+      setGetPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === idNbr
+            ? { ...post, like_count: post.like_count + 1 }
+            : post
+        )
+      );
+    } else {
+      toast.error(` please loggedIn as ${email}`, {
+        style: {},
+        duration: 5000,
+        position: "top-center",
+      });
+    }
   };
 
   const updateRepostCount = async (
@@ -61,24 +76,33 @@ const UserPost = () => {
     email: string
   ) => {
     const newRepostCount = value + 1;
-    const { error } = await supabase
-      .from("posts")
-      .update({ repost_count: newRepostCount })
-      .eq("id", idNbr)
-      .eq("email", email)
-      .select();
-    if (error) {
-      console.error("Error updating repost_count:", error.message);
-      return;
-    }
 
-    setGetPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post.id === idNbr
-          ? { ...post, repost_count: post.repost_count + 1 }
-          : post
-      )
-    );
+    if (email === user?.email) {
+      const { error } = await supabase
+        .from("posts")
+        .update({ repost_count: newRepostCount })
+        .eq("id", idNbr)
+        .eq("email", email)
+        .select();
+      if (error) {
+        console.error("Error updating repost_count:", error.message);
+        return;
+      }
+
+      setGetPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === idNbr
+            ? { ...post, repost_count: post.repost_count + 1 }
+            : post
+        )
+      );
+    } else {
+      toast.error(` please loggedIn as ${email}`, {
+        style: {},
+        duration: 5000,
+        position: "top-center",
+      });
+    }
   };
 
   useEffect(() => {
@@ -147,6 +171,7 @@ const UserPost = () => {
           </div>
         ))}
       </div>
+      <Toaster />
     </>
   );
 };

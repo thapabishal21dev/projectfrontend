@@ -2,7 +2,6 @@ import { type NextRequest, type NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 
-// server component can only get cookies and not set them, hence the "component" check
 export function createSupabaseServerClient(component: boolean = false) {
   const cookieStore = cookies();
   return createServerClient(
