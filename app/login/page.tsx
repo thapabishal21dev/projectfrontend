@@ -11,7 +11,7 @@ const Login = ({ nextUrl }: { nextUrl?: string }) => {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${location.origin}/auth/callback?next=${nextUrl}`,
+        redirectTo: `${location.origin}/auth/callback?next=${nextUrl || ""}`,
       },
     });
     toast.success(`User  logged in with ${provider}`, {
