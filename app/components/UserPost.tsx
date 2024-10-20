@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { BiLike, BiRepost } from "react-icons/bi";
 import { createSupabaseBrowserClient } from "../lib/supabase/browser-client";
-import useSession from "../lib/supabase/use-session";
 
 interface IPost {
   id: number;
@@ -15,7 +14,6 @@ interface IPost {
 }
 
 const UserPost = () => {
-  const user = useSession()?.user;
   const [getPosts, setGetPosts] = useState<IPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const supabase = createSupabaseBrowserClient();
@@ -119,7 +117,7 @@ const UserPost = () => {
             <div className="flex flex-col">
               <h1 className="truncate text-xl capitalize">{list.title}</h1>
               <p className="italic text-[12px] text-gray-700">
-                created by {list.created_by}
+                created by {list.email}
               </p>
               <p
                 className="flex-grow overflow-hidden mt-6 text-justify text-gray-700"
