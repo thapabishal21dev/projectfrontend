@@ -5,19 +5,21 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { toast, Toaster } from "sonner";
 
-const Login = (props: { nextUrl?: string }) => {
+interface LoginProps {
+  nextUrl?: string;
+}
+
+const Login: React.FC<LoginProps> = ({ nextUrl }) => {
   const supabase = createSupabaseBrowserClient();
 
   const handleLogin = async (provider: "google" | "github") => {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${location.origin}/auth/callback?next=${
-          props.nextUrl || ""
-        }`,
+        redirectTo: `${location.origin}/auth/callback?next=${nextUrl || ""}`,
       },
     });
-    toast.success(`User logged in with ${provider}`, {
+    toast.success(`User  logged in with ${provider}`, {
       style: {},
       duration: 3000,
       position: "top-center",
