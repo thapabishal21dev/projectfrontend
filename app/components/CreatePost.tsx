@@ -1,13 +1,14 @@
 "use client";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
+import { createSupabaseBrowserClient } from "../lib/supabase/browser-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { createSupabaseBrowserClient } from "../lib/supabase/browser-client";
 import useSession from "../lib/supabase/use-session";
 import { toast, Toaster } from "sonner";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 interface IPost {
   title: string;
   content: string | null;
@@ -15,15 +16,15 @@ interface IPost {
 }
 
 const CreatePost = () => {
-  const user = useSession()?.user;
-  const userEmail = user?.email;
-  const supabase = createSupabaseBrowserClient();
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [addPost, setAddPost] = useState<IPost>({
     title: "",
     content: null,
   });
+  const user = useSession()?.user;
+  const userEmail = user?.email;
+  const supabase = createSupabaseBrowserClient();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

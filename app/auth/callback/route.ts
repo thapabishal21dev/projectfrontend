@@ -4,14 +4,15 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
 
+  // get code from OAuth provider
   const code = searchParams.get("code");
 
-  // if "next" is in param, use it in the redirect URL
+  // next = /dashboard
   const next = searchParams.get("next") ?? "/";
 
   if (code) {
     const supabase = createSupabaseServerClient();
-
+    // exchange code with supabase
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
@@ -19,7 +20,5 @@ export async function GET(request: Request) {
     }
   }
 
-  // TODO: Create this page
-  // return the user to an error page with instructions
   return NextResponse.redirect(`${origin}/auth/auth-error`);
 }
