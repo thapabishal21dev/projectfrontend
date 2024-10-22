@@ -57,7 +57,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className=" mx-40 ">
+    <div className=" mx-56 ">
       <form onSubmit={handleSubmit}>
         <div className="bg-white w-full rounded px-6 mt-6 py-6 border-2 border-gray-200">
           <div>

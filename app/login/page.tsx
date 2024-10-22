@@ -31,7 +31,9 @@ const Login = () => {
   return (
     <div className="flex justify-center h-screen bg-[#f8f8f8] p-24">
       <div className="flex flex-col gap-4 w-[500px] bg-white h-fit p-12 rounded-lg">
-        <h1 className="text-center text-2xl">Sign in to your account</h1>
+        <h1 className="text-center text-3xl text-green-500">
+          Sign in to your account
+        </h1>
         <Button
           className="bg-white hover:bg-gray-100 text-black border-2 border-gray-200"
           onClick={() => handleLogin("google")}

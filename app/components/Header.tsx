@@ -21,9 +21,9 @@ const Header = () => {
     });
   };
   return (
-    <div className=" bg-[#292727fb] items-center py-2 border-b-2 border-b-slate-600">
+    <div className=" bg-[#292727fb] items-center py-2 border-b-2 border-b-slate-600 ">
       {user ? (
-        <div className=" flex justify-between items-center mx-40 py-2">
+        <div className=" flex justify-between items-center mx-56 py-2">
           <h1 className=" text-xl text-white ">
             Welcome
             <span className=" text-green-500 px-2">

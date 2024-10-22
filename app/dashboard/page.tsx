@@ -5,7 +5,7 @@ import UserPost from "../components/UserPost";
 
 const Dashboard = () => {
   return (
-    <div className=" bg-[#f8f8f8] flex flex-col h-full justify-center gap-4">
+    <div className=" bg-[#f8f8f8] flex flex-col h-full justify-center gap-4 ">
       <Headers />
       <CreatePost />
       <UserPost />

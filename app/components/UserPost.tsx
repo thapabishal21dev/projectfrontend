@@ -131,10 +131,10 @@ const UserPost = () => {
   return (
     <>
       <h1 className="text-center text-2xl ">User Post List</h1>
-      <div className="flex flex-col-reverse mx-40">
+      <div className="flex flex-col-reverse mx-56">
         {getPosts.map((list) => (
           <div
-            className="bg-[#ffffff] border-2 border-gray-200 rounded-lg gap-6 flex flex-col my-2 p-6 w-full"
+            className="bg-[#ffffff] border-2 border-gray-200 rounded-lg gap-6 flex flex-col my-2 pt-6 px-6 pb-2 w-full"
             key={list.id}
           >
             <div className="flex flex-col">
@@ -147,24 +147,24 @@ const UserPost = () => {
                 dangerouslySetInnerHTML={{ __html: list.content }}
               />
             </div>
-            <div className="flex items-center gap-2 text-slate-500">
-              <div className="flex items-center gap-2 cursor-pointer">
+            <div className="flex items-center gap-4 text-slate-500">
+              <div className="flex items-center gap-4">
                 <BiLike
                   onClick={() =>
                     updateLikeCount(list.id, list.like_count, list.email)
                   }
-                  className="text-xl hover:scale-105 transition ease-in-out hover:text-red-500"
+                  className="text-xl hover:scale-105 transition ease-in-out hover:text-red-500 cursor-pointer"
                 />
-                {list.like_count}
+                <span>{list.like_count}</span>
               </div>
-              <div className="flex items-center gap-2 cursor-pointer">
+              <div className="flex items-center gap-2 ">
                 <BiRepost
                   onClick={() =>
                     updateRepostCount(list.id, list.repost_count, list.email)
                   }
-                  className="text-2xl hover:scale-105 transition ease-in-out hover:text-sky-500"
+                  className="text-2xl hover:scale-105 transition ease-in-out hover:text-sky-500 cursor-pointer"
                 />
-                {list.repost_count}
+                <span> {list.repost_count}</span>
               </div>
             </div>
           </div>
