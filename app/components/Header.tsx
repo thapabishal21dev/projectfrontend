@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <div className=" bg-[#292727fb] items-center py-2 border-b-2 border-b-slate-600 ">
       {user ? (
-        <div className=" flex justify-between items-center mx-56 py-2">
+        <div className=" flex items-center mx-56 py-2 flex-col">
           <h1 className=" text-xl text-white ">
             Welcome
             <span className=" text-green-500 px-2">
@@ -39,7 +39,7 @@ const Header = () => {
           </Button>
         </div>
       ) : (
-        <div className=" flex justify-center py-4">loading User...</div>
+        <div className="  justify-center  flex py-4">loading User...</div>
       )}
       <Toaster />
     </div>

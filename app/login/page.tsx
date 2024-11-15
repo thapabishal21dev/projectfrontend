@@ -29,8 +29,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center h-screen bg-[#f8f8f8] p-24">
-      <div className="flex flex-col gap-4 w-[500px] bg-white h-fit p-12 rounded-lg">
+    <div className="flex justify-center h-screen w-full bg-[#f8f8f8] lg:p-24 sm:p-12 ">
+      <div className="flex mx-auto sm:justify-center flex-col gap-4 w-[500px] bg-white h-fit p-12 rounded-lg">
         <h1 className="text-center text-3xl text-green-500">
           Sign in to your account
         </h1>
